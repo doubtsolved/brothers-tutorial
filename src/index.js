@@ -137,6 +137,9 @@ app.get('/admission-details', serveHtml('admission-details.html'));
 // Mount all administrative endpoints cleanly from the admin folder module
 app.route('/admin', routes_ts_1.adminRoutes);
 // Start runtime engine
+// Existing serve configurations remain completely intact for local Termux execution
 var port = Number(process.env.PORT) || 3000;
 console.log("\n\uD83D\uDD25 Architecture Decoupled & Active at http://localhost:".concat(port));
 (0, node_server_1.serve)({ fetch: app.fetch, port: port });
+// ADD THIS LINE FOR CLOUDFLARE CLOUD RESOLUTION:
+exports.default = app;

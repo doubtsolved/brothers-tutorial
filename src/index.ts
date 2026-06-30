@@ -62,6 +62,12 @@ app.get('/admission-details', serveHtml('admission-details.html'))
 app.route('/admin', adminRoutes)
 
 // Start runtime engine
+
+
+// Existing serve configurations remain completely intact for local Termux execution
 const port = Number(process.env.PORT) || 3000
 console.log(`\n🔥 Architecture Decoupled & Active at http://localhost:${port}`)
 serve({ fetch: app.fetch, port })
+
+// ADD THIS LINE FOR CLOUDFLARE CLOUD RESOLUTION:
+export default app
