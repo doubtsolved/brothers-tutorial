@@ -1,75 +1,41 @@
 import { Hono } from 'hono'
-import { serve } from '@hono/node-server'
-import fs from 'fs'
-import { join } from 'path'
-import { getLocalKV, putLocalKV } from './kvMock.ts'
-
-// FIXED: Import the decoupled route layer with explicit strict ESM extension
-import { adminRoutes } from './admin/routes.ts'
 
 const app = new Hono()
 
-// Database Getter/Setter Actions abstraction layers
-async function getDataset(c: any) {
-  if (c.env && c.env.BROTHERS_KV) {
-    const data = await c.env.BROTHERS_KV.get('site_data')
-    return JSON.parse(data || '{}')
-  }
-  return JSON.parse(await getLocalKV())
+// KV helper strictly for Cloudflare Runtime
+const getKV = async (c: any) => {
+  const data = await c.env.BROTHERS_KV.get('site_data')
+  return JSON.parse(data || '{}')
 }
 
-async function saveDataset(c: any, data: any) {
-  const jsonString = JSON.stringify(data, null, 2)
-  if (c.env && c.env.BROTHERS_KV) {
-    await c.env.BROTHERS_KV.put('site_data', jsonString)
-    return
-  }
-  await putLocalKV(jsonString)
-}
-
-// Global Middleware Context Hook: Injects system utility configurations safely into admin scopes
-// Global Middleware Context Hook: Safe extension that merges properties without dropping native bindings
-app.use('*', async (c, next) => {
-  c.env = {
-    // Retain all existing cloud native variables (like BROTHERS_KV) passed down by Cloudflare Pages
-    ...c.env,
-    getDatasetHelper: getDataset,
-    saveDatasetHelper: saveDataset,
-    serveHtmlHelper: (ctx: any, filename: string) => {
-      return ctx.html(fs.readFileSync(join(process.cwd(), 'public', filename), 'utf-8'))
-    }
-  }
-  await next()
-})
-
-// ----------------- PUBLIC CORE SITE ENDPOINTS -----------------
+// 1. Core API for your frontend
 app.get('/api/content', async (c) => {
-  return c.json(await getDataset(c))
+  const data = await getKV(c)
+  return c.json(data)
 })
 
-const serveHtml = (filename: string) => (c: any) => {
-  try {
-    return c.html(fs.readFileSync(join(process.cwd(), 'public', filename), 'utf-8'))
-  } catch {
-    return c.text(`${filename} template asset unreadable.`, 404)
-  }
-}
+// 2. Serve your pages as dynamic templates (using the same logic as Admin)
+app.get('/', async (c) => {
+  const data = await getKV(c)
+  return c.html(`
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <script src="https://cdn.tailwindcss.com"></script>
+      </head>
+      <body>
+        <h1 id="hero-title">${data.sections.heroHeading}</h1>
+        <script>
+          // Frontend fetch to ensure it grabs the live data
+          fetch('/api/content')
+            .then(res => res.json())
+            .then(data => {
+              document.getElementById('hero-title').innerText = data.sections.heroHeading;
+            });
+        </script>
+      </body>
+    </html>
+  `)
+})
 
-app.get('/', serveHtml('index.html'))
-app.get('/about', serveHtml('about.html'))
-app.get('/admission-details', serveHtml('admission-details.html'))
-
-// ----------------- SUB-ROUTER MOUNT -----------------
-// Mount all administrative endpoints cleanly from the admin folder module
-app.route('/admin', adminRoutes)
-
-// Start runtime engine
-
-
-// Existing serve configurations remain completely intact for local Termux execution
-const port = Number(process.env.PORT) || 3000
-console.log(`\n🔥 Architecture Decoupled & Active at http://localhost:${port}`)
-serve({ fetch: app.fetch, port })
-
-// ADD THIS LINE FOR CLOUDFLARE CLOUD RESOLUTION:
 export default app
