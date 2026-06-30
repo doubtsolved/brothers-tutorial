@@ -96,6 +96,7 @@ function saveDataset(c, data) {
     });
 }
 // Global Middleware Context Hook: Injects system utility configurations safely into admin scopes
+// Global Middleware Context Hook: Safe extension that merges properties without dropping native bindings
 app.use('*', function (c, next) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         switch (_a.label) {

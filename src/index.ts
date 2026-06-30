@@ -28,8 +28,10 @@ async function saveDataset(c: any, data: any) {
 }
 
 // Global Middleware Context Hook: Injects system utility configurations safely into admin scopes
+// Global Middleware Context Hook: Safe extension that merges properties without dropping native bindings
 app.use('*', async (c, next) => {
   c.env = {
+    // Retain all existing cloud native variables (like BROTHERS_KV) passed down by Cloudflare Pages
     ...c.env,
     getDatasetHelper: getDataset,
     saveDatasetHelper: saveDataset,

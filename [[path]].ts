@@ -1,4 +1,7 @@
 import { handle } from 'hono/cloudflare-pages'
 import app from '../src/index.ts'
 
-export const onRequest = handle(app)
+// This ensures all requests, including api endpoints, are routed cleanly through your Hono app execution context
+export const onRequest = (context) => {
+  return handle(app)(context)
+}
