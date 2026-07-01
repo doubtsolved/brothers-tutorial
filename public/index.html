@@ -1,510 +1,322 @@
-<!doctype html>
-<html lang="en" class="scroll-smooth">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brothers Tutorial | Academic Excellence</title>
-  
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,700;9..144,900&family=Noto+Serif+Bengali:wght@400;600;700&display=swap" rel="stylesheet">
-  
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"DM Sans"', 'sans-serif'],
-            display: ['Fraunces', 'serif'],
-            bengali: ['"Noto Serif Bengali"', 'serif'],
-          },
-          colors: {
-            brand: {
-              navy: '#1e3a5f',
-              blue: '#2c5282',
-              amber: '#f59e0b',
-              light: '#f8fafc'
-            }
-          }
-        }
-      }
-    }
-  </script>
-
-  <style>
-    body { font-family: 'DM Sans', sans-serif; }
-    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-in-out; }
-    #mobile-menu.open { max-height: 400px; }
-    .carousel-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.7s ease-in-out; }
-    .carousel-slide.active { opacity: 1; z-index: 10; }
-    #carousel-track:hover #carousel-prev, #carousel-track:hover #carousel-next { opacity: 1; transform: translateY(-50%) scale(1); }
-    .timeline-item { padding-left: 2.5rem; position: relative; }
-    .timeline-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: -1.5rem; width: 2px; background: #e2e8f0; }
-    .timeline-item:last-child::before { display: none; }
-    .timeline-dot { position: absolute; left: -5px; top: 6px; width: 12px; height: 12px; background: #f59e0b; border-radius: 50%; box-shadow: 0 0 0 4px #fff; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Brothers' Tutorial — Baruipara, Nadia</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:'#1e3a5f','primary-light':'#2a5080',accent:'#f59e0b','accent-dark':'#d97706'}}}}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+body{font-family:'Inter','Noto Sans Bengali',sans-serif}
+.bn{font-family:'Noto Sans Bengali','Inter',sans-serif}
+.carousel-track{display:flex;transition:transform .6s cubic-bezier(.25,.46,.45,.94)}
+.notice-line::before{content:'';position:absolute;left:15px;top:32px;bottom:-12px;width:2px;background:#cbd5e1}
+.notice-line:last-child::before{display:none}
+.fade-up{opacity:0;transform:translateY(20px);transition:opacity .5s,transform .5s}
+.fade-up.visible{opacity:1;transform:translateY(0)}
+</style>
 </head>
-<body id="top" class="min-h-screen flex flex-col bg-brand-light text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-800">
 
-  <div id="announcement-banner" class="relative py-2.5 px-4 text-center text-sm font-semibold bg-brand-amber text-slate-900 shadow-sm z-50 transition-all duration-300">
-    <div class="max-w-6xl mx-auto flex items-center justify-center gap-3 flex-wrap">
-      <span id="banner-text">🎓 Loading announcements...</span>
+<!-- Alert Banner -->
+<div id="alertBanner" class="hidden"></div>
+
+<!-- Navigation -->
+<nav class="bg-primary text-white sticky top-0 z-40 shadow-lg">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1e3a5f" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342"/></svg>
+      </div>
+      <div class="leading-tight">
+        <div class="font-bold text-sm" id="navTitle">Brothers' Tutorial</div>
+        <div class="text-[10px] text-white/50 bn" id="navTitleBn">ব্রাদার্স টিউটোরিয়াল</div>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a href="/" class="hover:text-accent transition">Home</a>
+      <a href="/about.html" class="hover:text-accent transition">About</a>
+      <a href="/admission-details.html" class="hover:text-accent transition">Admission</a>
+      <a href="#downloads" class="hover:text-accent transition">Downloads</a>
     </div>
-    <button id="close-banner" class="absolute right-4 top-1/2 -translate-y-1/2 p-1 rounded-full hover:bg-black/10 transition-colors">
-      <i data-lucide="x" class="w-4 h-4"></i>
+    <button id="mobMenuBtn" class="md:hidden p-1">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
     </button>
   </div>
+  <!-- Mobile menu -->
+  <div id="mobMenu" class="hidden md:hidden border-t border-white/10 px-4 pb-3 pt-2 space-y-1 text-sm font-medium">
+    <a href="/" class="block py-2 hover:text-accent transition">Home</a>
+    <a href="/about.html" class="block py-2 hover:text-accent transition">About</a>
+    <a href="/admission-details.html" class="block py-2 hover:text-accent transition">Admission</a>
+    <a href="#downloads" class="block py-2 hover:text-accent transition">Downloads</a>
+  </div>
+</nav>
 
-  <nav class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
-    <div class="max-w-6xl mx-auto px-4 md:px-6 py-4 flex items-center justify-between">
-<a href="#top" class="flex items-center gap-3 group">
-        <div id="nav-logo-container" class="w-10 h-10 rounded-lg flex items-center justify-center text-white shadow-md bg-brand-navy group-hover:bg-brand-blue transition-colors overflow-hidden">
-          <i id="nav-logo-icon" data-lucide="graduation-cap" class="w-6 h-6"></i>
-          <img id="nav-logo-img" class="w-full h-full object-cover hidden" alt="Logo">
-        </div>
-        <span class="font-display font-bold text-2xl text-brand-navy tracking-tight">Brothers Tutorial</span>
-      </a>
-      
-<div class="hidden md:flex items-center gap-8">
-        <a href="#top" class="text-sm font-semibold text-brand-navy hover:text-brand-amber transition-colors">Home</a>
-        <a href="/about" class="text-sm font-semibold text-slate-600 hover:text-brand-navy transition-colors">About</a>
-        <a href="#academic" class="text-sm font-semibold text-slate-600 hover:text-brand-navy transition-colors">Academic</a>
-        <a href="#notices" class="text-sm font-semibold text-slate-600 hover:text-brand-navy transition-colors">Notices</a>
-        <a href="#admissions" class="text-sm font-semibold text-slate-600 hover:text-brand-navy transition-colors">Admissions</a>
-        <a href="/admin" class="px-5 py-2.5 rounded-full bg-brand-navy text-white text-sm font-semibold hover:bg-brand-blue hover:shadow-lg transition-all">Admin Dashboard</a>
+<!-- Hero / Carousel -->
+<section class="relative overflow-hidden bg-primary" style="min-height:420px">
+  <div id="heroBg" class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image:linear-gradient(135deg,#1e3a5f 0%,#2a5080 100%)"></div>
+  <div class="relative z-10 max-w-6xl mx-auto px-4 py-16 md:py-24 flex flex-col items-center text-center text-white">
+    <!-- Carousel container -->
+    <div class="w-full max-w-3xl mx-auto relative" style="min-height:200px">
+      <div id="carouselTrack" class="carousel-track">
+        <!-- Slides injected here or fallback -->
       </div>
-      
-      <button id="hamburger" class="md:hidden p-2 text-brand-navy rounded-md hover:bg-slate-100">
-        <i data-lucide="menu" class="w-6 h-6"></i>
+      <!-- Fallback hero text when no slides -->
+      <div id="heroFallback" class="text-center">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold leading-tight mb-4" id="heroTitle">Brothers' Tutorial</h1>
+        <p class="bn text-xl md:text-2xl font-semibold text-accent mb-2" id="heroTitleBn">ব্রাদার্স টিউটোরিয়াল</p>
+        <p class="text-lg md:text-xl text-white/80 max-w-xl mx-auto" id="heroSub">Nurturing Minds, Building Futures</p>
+        <p class="bn text-base text-white/60 max-w-xl mx-auto" id="heroSubBn">মনন গড়া, ভবিষ্যৎ নির্মাণ</p>
+      </div>
+    </div>
+    <!-- Carousel controls -->
+    <div id="carouselControls" class="hidden mt-6 flex items-center gap-4">
+      <button id="prevSlide" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"/></svg>
+      </button>
+      <div id="carouselDots" class="flex gap-2"></div>
+      <button id="nextSlide" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-white"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg>
       </button>
     </div>
-    <div id="mobile-menu" class="md:hidden bg-white border-t border-slate-100">
-      <div class="flex flex-col px-4 py-4 space-y-4">
-        <a href="#top" class="text-base font-semibold text-brand-navy">Home</a>
-        <a href="/about" class="text-base font-medium text-slate-600">About</a>
-        <a href="#academic" class="text-base font-medium text-slate-600">Academic</a>
-        <a href="#notices" class="text-base font-medium text-slate-600">Notices</a>
-        <a href="#admissions" class="text-base font-medium text-slate-600">Admissions</a>
-        <a href="/admin" class="text-base font-medium text-brand-amber">Admin Dashboard</a>
+  </div>
+</section>
+
+<!-- About Brief -->
+<section class="py-12 md:py-16">
+  <div class="max-w-6xl mx-auto px-4">
+    <p class="text-center text-slate-600 max-w-2xl mx-auto text-lg leading-relaxed" id="aboutBrief"></p>
+    <p class="bn text-center text-slate-500 max-w-2xl mx-auto mt-2 text-base leading-relaxed" id="aboutBriefBn"></p>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="py-12 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-bold text-primary text-center mb-10">Why Choose Us</h2>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6" id="featuresGrid"></div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="py-14 bg-primary text-white">
+  <div class="max-w-5xl mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-6 text-center" id="statsGrid"></div>
+</section>
+
+<!-- Notice Board -->
+<section class="py-14">
+  <div class="max-w-3xl mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-bold text-primary text-center mb-8 flex items-center justify-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"/></svg>
+      Notice Board
+    </h2>
+    <div id="noticeBoard" class="max-h-96 overflow-y-auto pr-2 space-y-4"></div>
+    <p id="noNotices" class="hidden text-center text-slate-400 py-8">No notices at this time</p>
+  </div>
+</section>
+
+<!-- Downloads -->
+<section id="downloads" class="py-14 bg-white">
+  <div class="max-w-6xl mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-bold text-primary text-center mb-8 flex items-center justify-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg>
+      Downloads
+    </h2>
+    <div id="downloadsGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    <p id="noDownloads" class="hidden text-center text-slate-400 py-8">No downloads available</p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-primary text-white py-10">
+  <div class="max-w-6xl mx-auto px-4 grid md:grid-cols-3 gap-8 text-sm">
+    <div>
+      <div class="font-bold text-lg mb-2">Brothers' Tutorial</div>
+      <p class="bn text-white/60 mb-3">ব্রাদার্স টিউটোরিয়াল</p>
+      <p class="text-white/70 leading-relaxed">Baruipara, Nadia, West Bengal, India</p>
+      <p class="bn text-white/50 mt-1">বড়ুইপাড়া, নদিয়া, পশ্চিমবঙ্গ</p>
+    </div>
+    <div>
+      <div class="font-semibold mb-3 text-accent">Quick Links</div>
+      <div class="space-y-2 text-white/70">
+        <a href="/" class="block hover:text-white transition">Home</a>
+        <a href="/about.html" class="block hover:text-white transition">About Us</a>
+        <a href="/admission-details.html" class="block hover:text-white transition">Admission</a>
+        <a href="#downloads" class="block hover:text-white transition">Downloads</a>
       </div>
     </div>
-  </nav>
-
-  <header class="relative w-full overflow-hidden flex flex-col justify-center" style="min-height: 80vh;">
-    <div id="hero-bg" class="absolute inset-0 w-full h-full bg-cover bg-center transition-all duration-500"></div>
-    <div class="absolute inset-0 bg-gradient-to-r from-brand-navy/90 to-brand-navy/60"></div>
-    
-    <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-4 py-24 mx-auto max-w-4xl">
-      <span id="hero-tagline" class="inline-block py-1 px-3 rounded-full bg-white/20 text-white text-sm font-medium tracking-wider backdrop-blur-sm mb-6 border border-white/30">ESTD. 2021</span>
-      <h1 id="hero-heading" class="font-display font-bengali font-bold text-4xl md:text-6xl text-white mb-6 leading-tight drop-shadow-md">পড়াশোনার এক অভিনভ ঠিকানা</h1>
-      <p id="hero-subheading" class="text-lg md:text-xl text-slate-200 mb-10 max-w-2xl font-light leading-relaxed">Loading content engine...</p>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center w-full sm:w-auto">
-        <a href="#academic" class="px-8 py-4 rounded-full bg-brand-amber text-slate-900 font-bold text-lg hover:bg-yellow-400 hover:shadow-xl transition-all transform hover:-translate-y-1">Explore Programs</a>
-        <a href="#admissions" class="px-8 py-4 rounded-full bg-transparent border-2 border-white text-white font-bold text-lg hover:bg-white hover:text-brand-navy hover:shadow-xl transition-all transform hover:-translate-y-1">Admission Inquiry</a>
+    <div>
+      <div class="font-semibold mb-3 text-accent">Contact</div>
+      <div class="space-y-2 text-white/70">
+        <p class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 flex-shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+          +91 XXXXX XXXXX
+        </p>
+        <p class="flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 flex-shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/></svg>
+          info@brotherstutorial.com
+        </p>
+        <p class="flex items-start gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 flex-shrink-0 mt-0.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+          Baruipara, Nadia, West Bengal
+        </p>
       </div>
-    </div>
-  </header>
-
-  <section id="about" class="w-full py-20 px-4 bg-white relative z-20 -mt-8 rounded-t-3xl shadow-xl max-w-7xl mx-auto">
-    <div class="max-w-5xl mx-auto">
-      <div class="text-center mb-10">
-        <h2 id="about-heading" class="font-display font-bold text-3xl md:text-4xl text-brand-navy mb-4">Life at Brothers Tutorial</h2>
-        <p id="about-description" class="text-slate-600 max-w-2xl mx-auto">A glimpse into our vibrant educational environment, cultural events, and engaging learning activities.</p>
-      </div>
-
-      <div class="relative w-full bg-slate-900 rounded-2xl overflow-hidden shadow-2xl group" style="aspect-ratio: 16 / 9;">
-        <div id="carousel-track" class="relative w-full h-full"></div>
-        <div class="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black/80 via-black/40 to-transparent pointer-events-none z-20"></div>
-        
-        <div class="absolute bottom-10 left-0 right-0 text-center px-6 z-20 pointer-events-none">
-          <p id="carousel-caption" class="text-white font-display font-bold text-xl md:text-2xl tracking-wide drop-shadow-md"></p>
-        </div>
-        
-        <button id="carousel-prev" class="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/30 text-white hover:bg-brand-amber hover:text-slate-900 opacity-0 group-hover:opacity-100 transition-all"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
-        <button id="carousel-next" class="absolute right-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-black/30 text-white hover:bg-brand-amber hover:text-slate-900 opacity-0 group-hover:opacity-100 transition-all"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
-        <div id="carousel-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-2.5"></div>
-      </div>
-    </div>
-  </section>
-
-  <section id="academic" class="w-full py-20 px-4 bg-slate-50">
-    <div class="max-w-6xl mx-auto">
-      <div class="text-center mb-16">
-        <h2 id="pillars-heading" class="font-display font-bold text-3xl md:text-4xl text-brand-navy mb-4">Our Academic Pillars</h2>
-        <div class="w-24 h-1 bg-brand-amber mx-auto rounded-full mb-6"></div>
-        <p id="pillars-description" class="text-slate-600 max-w-2xl mx-auto text-lg">A structured approach designed to ensure academic excellence and the holistic growth of every student.</p>
-      </div>
-      
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div class="bg-white rounded-2xl p-8 text-center shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-amber-50 text-brand-amber flex items-center justify-center group-hover:bg-brand-amber group-hover:text-white transition-colors">
-            <i data-lucide="book-open" class="w-8 h-8"></i>
-          </div>
-          <h3 id="p1-title" class="font-bengali font-bold text-xl text-brand-navy mb-3">বিদ্যালয় কেন্দ্রিক</h3>
-          <h4 class="font-semibold text-slate-800 mb-3 text-sm uppercase tracking-wide">School-Centric Focus</h4>
-          <p id="p1-desc" class="text-slate-600 text-sm leading-relaxed">Finishing the school curriculum ahead of schedule to allow ample revision time before final exams.</p>
-        </div>
-        
-        <div class="bg-white rounded-2xl p-8 text-center shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-colors">
-            <i data-lucide="award" class="w-8 h-8"></i>
-          </div>
-          <h3 id="p2-title" class="font-bengali font-bold text-xl text-brand-navy mb-3">সামগ্রিক উন্নতি</h3>
-          <h4 class="font-semibold text-slate-800 mb-3 text-sm uppercase tracking-wide">Holistic Development</h4>
-          <p id="p2-desc" class="text-slate-600 text-sm leading-relaxed">Integrating Computers, Spoken English, Sports, and Karate to develop well-rounded individuals.</p>
-        </div>
-        
-        <div class="bg-white rounded-2xl p-8 text-center shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-amber-50 text-brand-amber flex items-center justify-center group-hover:bg-brand-amber group-hover:text-white transition-colors">
-            <i data-lucide="users" class="w-8 h-8"></i>
-          </div>
-          <h3 id="p3-title" class="font-bengali font-bold text-xl text-brand-navy mb-3">বিশেষজ্ঞ শিক্ষক</h3>
-          <h4 class="font-semibold text-slate-800 mb-3 text-sm uppercase tracking-wide">Expert Faculty</h4>
-          <p id="p3-desc" class="text-slate-600 text-sm leading-relaxed">Dedicated and experienced educators providing personalized guidance to every student's needs.</p>
-        </div>
-        
-        <div class="bg-white rounded-2xl p-8 text-center shadow-sm border border-slate-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 group">
-          <div class="w-16 h-16 mx-auto mb-6 rounded-2xl bg-blue-50 text-brand-blue flex items-center justify-center group-hover:bg-brand-blue group-hover:text-white transition-colors">
-            <i data-lucide="clipboard-check" class="w-8 h-8"></i>
-          </div>
-          <h3 id="p4-title" class="font-bengali font-bold text-xl text-brand-navy mb-3">মাসিক পরীক্ষা</h3>
-          <h4 class="font-semibold text-slate-800 mb-3 text-sm uppercase tracking-wide">Consistent Evaluation</h4>
-          <p id="p4-desc" class="text-slate-600 text-sm leading-relaxed">Weekly and monthly chapter tests ensuring continuous progress tracking and improvement.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="notices" class="w-full py-20 px-4 bg-white border-t border-slate-200">
-    <div class="max-w-6xl mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
-        
-        <div>
-          <div class="flex items-center gap-3 mb-8">
-            <div class="p-2 bg-brand-amber rounded-lg text-white"><i data-lucide="bell-ring" class="w-6 h-6"></i></div>
-            <h3 class="font-display font-bold text-2xl text-brand-navy">Notice Board</h3>
-          </div>
-          <div id="notices-list" class="space-y-6"></div>
-        </div>
-        
-        <div class="bg-slate-50 p-8 rounded-3xl border border-slate-200 shadow-sm">
-          <div class="flex items-center gap-3 mb-8">
-            <div class="p-2 bg-brand-blue rounded-lg text-white"><i data-lucide="folder-down" class="w-6 h-6"></i></div>
-            <h3 class="font-display font-bold text-2xl text-brand-navy">Resource Downloads</h3>
-          </div>
-          <div id="downloads-list" class="space-y-4"></div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <section id="admissions" class="w-full py-20 px-4 bg-brand-navy text-white relative overflow-hidden">
-    <div class="absolute top-0 right-0 w-96 h-96 bg-brand-blue rounded-full blur-3xl opacity-20 translate-x-1/3 -translate-y-1/3"></div>
-    <div class="absolute bottom-0 left-0 w-96 h-96 bg-brand-amber rounded-full blur-3xl opacity-10 -translate-x-1/3 translate-y-1/3"></div>
-    
-    <div class="max-w-6xl mx-auto relative z-10">
-      <div class="text-center mb-16">
-        <h2 id="admissions-heading" class="font-display font-bold text-3xl md:text-4xl mb-4">Join Our Community</h2>
-        <div class="w-24 h-1 bg-brand-amber mx-auto rounded-full mb-6"></div>
-        <p id="admissions-description" class="text-slate-300 max-w-2xl mx-auto text-lg">Take the first step towards a bright future. Get in touch with us for admissions or general inquiries.</p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 bg-white rounded-3xl overflow-hidden shadow-2xl">
-        
-<!-- Left Column: Guidelines (Updated with Know More Link) -->
-<div class="p-8 lg:p-12 bg-slate-50 text-slate-800 border-r border-slate-100 flex flex-col justify-between">
-  <div>
-    <div class="flex items-center justify-between mb-8 pb-6 border-b border-slate-200">
-      <h3 class="font-display font-bold text-2xl text-brand-navy">Admissions 2026-27</h3>
-      <span class="px-4 py-1.5 bg-green-100 text-green-700 font-bold rounded-full text-xs uppercase tracking-wide">Open Now</span>
-    </div>
-    
-    <div class="space-y-6 mb-8">
-      <div>
-        <h4 class="flex items-center gap-2 font-bold text-lg text-brand-navy mb-3">
-          <i data-lucide="check-circle-2" class="w-5 h-5 text-brand-amber"></i> Admission Policy
-        </h4>
-        <p id="policy-text" class="text-slate-600 text-sm leading-relaxed pl-7">Please collect registration forms by physically visiting our workspace center directly.</p>
-      </div>
-      <div>
-        <h4 class="flex items-center gap-2 font-bold text-lg text-brand-navy mb-3">
-          <i data-lucide="file-text" class="w-5 h-5 text-brand-amber"></i> Contact Address Details
-        </h4>
-        <p id="address-text" class="text-slate-600 text-sm leading-relaxed pl-7">Baruipara, Nadia, West Bengal, India</p>
-      </div>
-    </div>
-
-    <!-- The Know More Action Link button -->
-    <div class="pl-7">
-      <a href="/admission-details" class="inline-flex items-center gap-2 text-sm font-bold text-brand-blue hover:text-brand-navy transition-colors group">
-        Know More About Admissions 
-        <i data-lucide="arrow-right" class="w-4 h-4 transform group-hover:translate-x-1 transition-transform"></i>
-      </a>
     </div>
   </div>
-</div>
-
-        <div id="contact" class="p-8 lg:p-12 bg-white text-slate-800">
-          <h3 class="font-display font-bold text-2xl text-brand-navy mb-6">Send an Inquiry</h3>
-          
-          <form id="contact-form" class="space-y-5">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Full Name</label>
-                <input type="text" placeholder="John Doe" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:outline-none" required>
-              </div>
-              <div>
-                <label class="block text-sm font-semibold text-slate-700 mb-2">Phone Number</label>
-                <input type="tel" placeholder="+91 73847 50167" class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:outline-none" required>
-              </div>
-            </div>
-            <div>
-              <label class="block text-sm font-semibold text-slate-700 mb-2">Admission for Class</label>
-              <select class="w-full px-4 py-3 bg-slate-50 rounded-xl border border-slate-200 focus:outline-none cursor-pointer" required>
-                <option value="">Select a class...</option>
-                <option value="Nursery">Nursery</option>
-                <option value="Primary">Primary (I - IV)</option>
-                <option value="High">High School (IX - X)</option>
-                <option value="HigherSec">Higher Secondary (XI - XII)</option>
-              </select>
-            </div>
-            <button type="submit" class="w-full py-4 rounded-xl bg-brand-navy hover:bg-brand-blue text-white font-bold text-lg transition-all">
-              Submit Inquiry
-            </button>
-            <div id="form-message-alert" class="hidden text-sm font-medium py-3 px-4 rounded-xl text-center bg-green-100 text-green-700 mt-4">
-              Thank you! Your inquiry has been sent successfully.
-            </div>
-          </form>
-        </div>
-        
-      </div>
-    </div>
-  </section>
-
-  <footer class="bg-slate-900 text-slate-400 border-t border-white/10 pt-16 pb-8">
-    <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
-      
-      <div class="md:col-span-5">
-<a href="#top" class="flex items-center gap-3 mb-6 group">
-          <div id="footer-logo-container" class="w-10 h-10 bg-brand-amber rounded-lg flex items-center justify-center text-slate-900 overflow-hidden">
-            <i id="footer-logo-icon" data-lucide="graduation-cap" class="w-6 h-6"></i>
-            <img id="footer-logo-img" class="w-full h-full object-cover hidden" alt="Logo">
-          </div>
-          <span class="font-display font-bold text-2xl text-white">Brothers Tutorial</span>
-        </a>
-        <p id="footer-about-text" class="text-sm leading-relaxed mb-6 pr-4">
-          Empowering students with quality education, discipline, and values since 2021. Nurturing minds and building tomorrow's leaders today in a holistic environment.
-        </p>
-        <div class="flex gap-4">
-          <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-amber hover:text-slate-900 transition-all"><i data-lucide="facebook" class="w-5 h-5"></i></a>
-          <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-amber hover:text-slate-900 transition-all"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-          <a href="javascript:void(0)" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-amber hover:text-slate-900 transition-all"><i data-lucide="youtube" class="w-5 h-5"></i></a>
-        </div>
-      </div>
-      
-      <div class="md:col-span-3">
-        <h3 class="font-bold text-white text-lg mb-6">Quick Links</h3>
-        <ul class="space-y-3 text-sm">
-          <li><a href="#top" class="hover:text-brand-amber transition-colors flex items-center gap-2"><i data-lucide="chevron-right" class="w-4 h-4"></i> Home</a></li>
-          <li><a href="/about" class="hover:text-brand-amber transition-colors flex items-center gap-2"><i data-lucide="chevron-right" class="w-4 h-4"></i> About Us</a></li>
-          <li><a href="#academic" class="hover:text-brand-amber transition-colors flex items-center gap-2"><i data-lucide="chevron-right" class="w-4 h-4"></i> Academics</a></li>
-          <li><a href="#notices" class="hover:text-brand-amber transition-colors flex items-center gap-2"><i data-lucide="chevron-right" class="w-4 h-4"></i> Notice Board</a></li>
-        </ul>
-      </div>
-      
-      <div class="md:col-span-4">
-        <h3 class="font-bold text-white text-lg mb-6">Contact Us</h3>
-        <div class="space-y-4 text-sm">
-          <div class="flex items-start gap-3">
-            <i data-lucide="map-pin" class="w-5 h-5 text-brand-amber flex-shrink-0 mt-0.5"></i>
-            <p id="footer-address">Baruipara, Nadia<br>West Bengal, India</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <i data-lucide="phone" class="w-5 h-5 text-brand-amber flex-shrink-0"></i>
-            <p id="footer-phone">+91 73847 50167</p>
-          </div>
-          <div class="flex items-center gap-3">
-            <i data-lucide="mail" class="w-5 h-5 text-brand-amber flex-shrink-0"></i>
-            <p id="footer-email">brotherstutorialofficial@gmail.com</p>
-          </div>
-        </div>
-      </div>
-      
-    </div>
-    
-    <div class="max-w-6xl mx-auto px-4 pt-8 border-t border-white/10 text-center text-sm">
-      <p>© 2026 Brothers Tutorial. All rights reserved.</p>
-    </div>
-  </footer>
+  <div class="max-w-6xl mx-auto px-4 mt-8 pt-6 border-t border-white/10 text-center text-xs text-white/40">
+    &copy; 2024 Brothers' Tutorial. All rights reserved.
+  </div>
+</footer>
 
 <script>
-    let carouselImages = [];
-    let currentSlide = 0;
-    let carouselTimer = null; // Holds the auto-advance timer interval
+/* ── Mobile menu toggle ── */
+document.getElementById('mobMenuBtn').addEventListener('click', () => {
+  document.getElementById('mobMenu').classList.toggle('hidden')
+})
 
-    async function initializePage() {
-      try {
-        const response = await fetch('/api/content');
-        const data = await response.json();
-        
-        // Dynamic Logo Mapping Resolution Engine
-        if (data.sections.logoUrl) {
-          // Update Navigation Header Brand
-          document.getElementById('nav-logo-icon').classList.add('hidden');
-          const navImg = document.getElementById('nav-logo-img');
-          navImg.src = data.sections.logoUrl;
-          navImg.classList.remove('hidden');
+/* ── Feature icon map ── */
+function featIcon(name) {
+  const icons = {
+    academicCap: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342"/></svg>',
+    bookOpen: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/></svg>',
+    users: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z"/></svg>',
+    clock: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>'
+  }
+  return icons[name] || icons.academicCap
+}
 
-          // Update Footer Brand
-          document.getElementById('footer-logo-icon').classList.add('hidden');
-          const footerImg = document.getElementById('footer-logo-img');
-          footerImg.src = data.sections.logoUrl;
-          footerImg.classList.remove('hidden');
-        }
-        // 1. Map Core Section UI Content
-        document.getElementById('banner-text').textContent = data.sections.bannerText;
-        document.getElementById('hero-heading').textContent = data.sections.heroHeading;
-        document.getElementById('hero-subheading').textContent = data.sections.heroSubheading;
-        document.getElementById('hero-tagline').textContent = data.sections.heroTagline;
-        document.getElementById('about-heading').textContent = data.sections.aboutHeading;
-        document.getElementById('about-description').textContent = data.sections.aboutDescription;
-        document.getElementById('hero-bg').style.backgroundImage = `url('${data.sections.heroImageUrl}')`;
+/* ── File type colors ── */
+function typeColor(t) {
+  return { PDF: 'bg-red-100 text-red-700', DOC: 'bg-blue-100 text-blue-700', XLS: 'bg-green-100 text-green-700', IMG: 'bg-purple-100 text-purple-700', ZIP: 'bg-amber-100 text-amber-700' }[t] || 'bg-slate-100 text-slate-700'
+}
 
-        // 2. Map Academic & Admission Form Fields
-        document.getElementById('pillars-heading').textContent = data.sections.pillarsHeading;
-        document.getElementById('pillars-description').textContent = data.sections.pillarsDescription;
-        document.getElementById('p1-title').textContent = data.sections.p1Title;
-        document.getElementById('p1-desc').textContent = data.sections.p1Desc;
-        document.getElementById('p2-title').textContent = data.sections.p2Title;
-        document.getElementById('p2-desc').textContent = data.sections.p2Desc;
-        document.getElementById('p3-title').textContent = data.sections.p3Title;
-        document.getElementById('p3-desc').textContent = data.sections.p3Desc;
-        document.getElementById('p4-title').textContent = data.sections.p4Title;
-        document.getElementById('p4-desc').textContent = data.sections.p4Desc;
-        document.getElementById('admissions-heading').textContent = data.sections.admissionsHeading;
-        document.getElementById('admissions-description').textContent = data.sections.admissionsDescription;
-        document.getElementById('policy-text').textContent = data.sections.policyText;
-        document.getElementById('address-text').textContent = data.sections.addressText;
+/* ── Carousel state ── */
+let slideIdx = 0
+let slideCount = 0
+let slideTimer = null
 
-        // 3. Map Restored Footer Data Parameters Dynamically
-        document.getElementById('footer-about-text').textContent = data.sections.footerAboutText || data.sections.heroSubheading;
-        document.getElementById('footer-address').innerHTML = data.sections.footerAddressHtml || data.sections.addressText;
-        document.getElementById('footer-phone').textContent = data.sections.footerPhone || '+91 73847 50167';
-        document.getElementById('footer-email').textContent = data.sections.footerEmail || 'brotherstutorialofficial@gmail.com';
+function initCarousel(slides) {
+  const track = document.getElementById('carouselTrack')
+  const controls = document.getElementById('carouselControls')
+  const fallback = document.getElementById('heroFallback')
+  const dots = document.getElementById('carouselDots')
 
-        // 4. Map Slide Tracks
-        carouselImages = data.carousel;
-        renderCarousel();
-        
-        // Start the automatic rotation timer loop
-        startAutoSlide();
+  if (!slides || slides.length === 0) {
+    controls.classList.add('hidden')
+    fallback.classList.remove('hidden')
+    return
+  }
+  fallback.classList.add('hidden')
+  controls.classList.remove('hidden')
+  controls.style.display = 'flex'
+  slideCount = slides.length
 
-        // 5. Map Notices Timelines
-        document.getElementById('notices-list').innerHTML = data.notices.map(notice => `
-          <div class="timeline-item">
-            <div class="timeline-dot"></div>
-            <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
-              <span class="text-xs font-bold text-brand-amber uppercase">${notice.date}</span>
-              <h4 class="font-bold text-slate-800 mt-1">${notice.title}</h4>
-              <p class="text-sm text-slate-600 mt-1">${notice.desc}</p>
-            </div>
-          </div>
-        `).join('');
+  track.innerHTML = slides.map((s, i) => '<div class="w-full flex-shrink-0 flex flex-col items-center justify-center text-white px-4"><img src="' + s.url + '" class="max-h-64 md:max-h-80 rounded-xl shadow-2xl mb-4 object-contain" alt="' + (s.caption || '') + '"><p class="text-lg font-semibold">' + (s.caption || '') + '</p></div>').join('')
+  dots.innerHTML = slides.map((_, i) => '<button class="w-2.5 h-2.5 rounded-full transition ' + (i === 0 ? 'bg-accent' : 'bg-white/40') + '" data-dot="' + i + '"></button>').join('')
 
-        // 6. Map Resource Downloads Links
-        document.getElementById('downloads-list').innerHTML = data.downloads.map(dl => `
-          <a href="${dl.url}" target="_blank" class="flex items-center justify-between p-4 bg-white rounded-xl border border-slate-200 hover:shadow-md hover:bg-slate-50 transition-all group">
-            <div class="flex items-center gap-4">
-              <div class="p-2 bg-red-50 text-red-500 rounded-lg group-hover:bg-red-500 group-hover:text-white transition-colors">
-                <i data-lucide="file-text" class="w-5 h-5"></i>
-              </div>
-              <div>
-                <h4 class="font-bold text-sm text-slate-800">${dl.title}</h4>
-                <p class="text-xs text-slate-500 mt-0.5">${dl.type} • ${dl.size}</p>
-              </div>
-            </div>
-            <div class="text-slate-400 group-hover:text-brand-blue transition-colors">
-              <i data-lucide="external-link" class="w-5 h-5"></i>
-            </div>
-          </a>
-        `).join('');
-        
-        lucide.createIcons();
-      } catch (err) {
-        console.error("Layout content map synchronization breakdown.", err);
-      }
+  dots.querySelectorAll('button').forEach(d => d.addEventListener('click', () => goSlide(+d.dataset.dot)))
+  document.getElementById('prevSlide').addEventListener('click', () => goSlide((slideIdx - 1 + slideCount) % slideCount))
+  document.getElementById('nextSlide').addEventListener('click', () => goSlide((slideIdx + 1) % slideCount))
+
+  clearInterval(slideTimer)
+  slideTimer = setInterval(() => goSlide((slideIdx + 1) % slideCount), 4500)
+}
+
+function goSlide(i) {
+  slideIdx = i
+  document.getElementById('carouselTrack').style.transform = 'translateX(-' + (i * 100) + '%)'
+  document.querySelectorAll('#carouselDots button').forEach((d, idx) => {
+    d.className = 'w-2.5 h-2.5 rounded-full transition ' + (idx === i ? 'bg-accent scale-125' : 'bg-white/40')
+  })
+  clearInterval(slideTimer)
+  slideTimer = setInterval(() => goSlide((slideIdx + 1) % slideCount), 4500)
+}
+
+/* ── Fetch & render ── */
+async function init() {
+  try {
+    const r = await fetch('/api/content')
+    const d = await r.json()
+
+    /* Alert banner */
+    if (d.alert && d.alert.active) {
+      const colors = { info: 'bg-blue-600', warning: 'bg-amber-500', success: 'bg-emerald-600', error: 'bg-red-600' }
+      document.getElementById('alertBanner').className = colors[d.alert.type] || colors.info
+      document.getElementById('alertBanner').innerHTML = '<div class="max-w-6xl mx-auto px-4 py-2.5 text-white text-sm text-center font-medium">' + (d.alert.textEn || '') + '<br class="sm:hidden"><span class="hidden sm:inline"> &mdash; </span><span class="bn">' + (d.alert.textBn || '') + '</span></div>'
     }
 
+    /* Hero text */
+    document.getElementById('heroTitle').textContent = d.landing.heroTitleEn
+    document.getElementById('heroTitleBn').textContent = d.landing.heroTitleBn
+    document.getElementById('heroSub').textContent = d.landing.heroSubtitleEn
+    document.getElementById('heroSubBn').textContent = d.landing.heroSubtitleBn
+    document.getElementById('navTitle').textContent = d.landing.heroTitleEn
+    document.getElementById('navTitleBn').textContent = d.landing.heroTitleBn
 
-    function renderCarousel() {
-      if (!carouselImages.length) return;
-      const track = document.getElementById('carousel-track');
-      track.innerHTML = carouselImages.map((img, i) => `
-        <div class="carousel-slide ${i === 0 ? 'active' : ''}">
-          <img src="${img.src}" class="w-full h-full object-cover">
-        </div>
-      `).join('');
-      
-      const dots = document.getElementById('carousel-dots');
-      dots.innerHTML = carouselImages.map((_, i) => `
-        <button class="w-2.5 h-2.5 rounded-full transition-all ${i === 0 ? 'bg-white scale-125' : 'bg-white/40'}" onclick="manualGoToSlide(${i})"></button>
-      `).join('');
-      
-      document.getElementById('carousel-caption').textContent = carouselImages[0].caption;
+    /* Hero background */
+    if (d.hero && d.hero.url) {
+      document.getElementById('heroBg').style.backgroundImage = 'url(' + d.hero.url + ')'
     }
 
-    function goToSlide(index) {
-      const slides = document.querySelectorAll('.carousel-slide');
-      const dots = document.querySelectorAll('#carousel-dots button');
-      if(!slides.length || !carouselImages.length) return;
-      
-      slides[currentSlide].classList.remove('active');
-      dots[currentSlide].classList.remove('bg-white', 'scale-125');
-      dots[currentSlide].classList.add('bg-white/40');
-      
-      currentSlide = (index + carouselImages.length) % carouselImages.length;
-      
-      slides[currentSlide].classList.add('active');
-      dots[currentSlide].classList.add('bg-white', 'scale-125');
-      dots[currentSlide].classList.remove('bg-white/40');
-      document.getElementById('carousel-caption').textContent = carouselImages[currentSlide].caption;
+    /* About brief */
+    document.getElementById('aboutBrief').textContent = d.landing.aboutBriefEn
+    document.getElementById('aboutBriefBn').textContent = d.landing.aboutBriefBn
+
+    /* Features */
+    document.getElementById('featuresGrid').innerHTML = d.landing.features.map(f => '<div class="bg-slate-50 rounded-xl p-6 text-center hover:shadow-md transition fade-up"><div class="w-14 h-14 rounded-full bg-primary/10 text-primary flex items-center justify-center mx-auto mb-4">' + featIcon(f.icon) + '</div><h3 class="font-bold text-primary mb-1">' + f.titleEn + '</h3><p class="bn text-sm text-accent font-medium mb-2">' + f.titleBn + '</p><p class="text-sm text-slate-500 leading-relaxed">' + f.descEn + '</p><p class="bn text-xs text-slate-400 mt-1">' + f.descBn + '</p></div>').join('')
+
+    /* Stats */
+    const s = d.landing.stats
+    document.getElementById('statsGrid').innerHTML = [
+      { v: s.students, l: 'Students', lb: 'শিক্ষার্থী' },
+      { v: s.teachers, l: 'Teachers', lb: 'শিক্ষক' },
+      { v: s.years, l: 'Years', lb: 'বছর' },
+      { v: s.results, l: 'Results', lb: 'ফলাফল' }
+    ].map(x => '<div><div class="text-3xl md:text-4xl font-extrabold text-accent">' + x.v + '</div><div class="text-sm font-medium mt-1">' + x.l + '</div><div class="bn text-xs text-white/50">' + x.lb + '</div></div>').join('')
+
+    /* Carousel */
+    initCarousel(d.carousel)
+
+    /* Notices */
+    const nb = document.getElementById('noticeBoard')
+    if (d.notices && d.notices.length > 0) {
+      document.getElementById('noNotices').classList.add('hidden')
+      nb.innerHTML = d.notices.map(n => {
+        const dt = new Date(n.timestamp)
+        const dateStr = dt.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })
+        const timeStr = dt.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
+        return '<div class="notice-line relative pl-10"><div class="absolute left-0 top-1 w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div><div class="bg-white rounded-xl shadow-sm p-4"><p class="font-medium text-slate-800">' + (n.textEn || '') + '</p><p class="bn text-sm text-slate-500 mt-0.5">' + (n.textBn || '') + '</p><p class="text-xs text-slate-400 mt-1.5">' + dateStr + ' at ' + timeStr + '</p></div></div>'
+      }).join('')
+    } else {
+      nb.innerHTML = ''
+      document.getElementById('noNotices').classList.remove('hidden')
     }
 
-    // Auto-advance loop (updates every 5 seconds)
-    function startAutoSlide() {
-      if (carouselTimer) clearInterval(carouselTimer);
-      carouselTimer = setInterval(() => {
-        if (carouselImages.length > 0) {
-          goToSlide(currentSlide + 1);
-        }
-      }, 5000);
+    /* Downloads */
+    const dg = document.getElementById('downloadsGrid')
+    if (d.downloads && d.downloads.length > 0) {
+      document.getElementById('noDownloads').classList.add('hidden')
+      dg.innerHTML = d.downloads.map(dl => '<a href="' + dl.url + '" target="_blank" class="block bg-slate-50 rounded-xl p-4 hover:shadow-md transition group"><div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-lg ' + typeColor(dl.type) + ' flex items-center justify-center font-bold text-xs flex-shrink-0">' + (dl.type || 'PDF') + '</div><div class="min-w-0 flex-1"><p class="font-semibold text-sm text-slate-800 truncate group-hover:text-primary transition">' + (dl.title || 'Download') + '</p><p class="text-xs text-slate-400">' + (dl.fileSize || '') + '</p></div><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-slate-400 group-hover:text-accent transition flex-shrink-0"><path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3"/></svg></div></a>').join('')
+    } else {
+      dg.innerHTML = ''
+      document.getElementById('noDownloads').classList.remove('hidden')
     }
 
-    // Reset auto-timer if user interacts manually
-    function manualGoToSlide(index) {
-      goToSlide(index);
-      startAutoSlide();
-    }
+    /* Scroll fade-in */
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target) } })
+    }, { threshold: 0.15 })
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el))
 
-    document.getElementById('carousel-next').addEventListener('click', () => { manualGoToSlide(currentSlide + 1); });
-    document.getElementById('carousel-prev').addEventListener('click', () => { manualGoToSlide(currentSlide - 1); });
-    document.getElementById('hamburger').addEventListener('click', () => { document.getElementById('mobile-menu').classList.toggle('open'); });
-    document.getElementById('close-banner').addEventListener('click', () => { document.getElementById('announcement-banner').style.display = 'none'; });
-    
-    document.getElementById('contact-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const alert = document.getElementById('form-message-alert');
-      alert.classList.remove('hidden');
-      e.target.reset();
-      setTimeout(() => alert.classList.add('hidden'), 4000);
-    });
+  } catch (e) {
+    console.error('Failed to load content:', e)
+  }
+}
 
-    document.addEventListener('DOMContentLoaded', initializePage);
-  </script>
+init()
+</script>
 </body>
 </html>

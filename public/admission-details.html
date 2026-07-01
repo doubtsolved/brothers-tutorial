@@ -1,202 +1,157 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admission Details | Brothers Tutorial</title>
-  
-  <!-- Tailwind CSS & Lucide Icons -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
-  
-  <!-- Modern Clean Typography for English and Bengali -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Hind+Siliguri:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['Inter', '"Hind Siliguri"', 'sans-serif'],
-          },
-          colors: {
-            brand: {
-              navy: '#1e3a5f',
-              blue: '#2c5282',
-              emerald: '#059669',
-              light: '#f8fafc',
-              slate: '#64748b'
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body { font-family: 'Inter', 'Hind Siliguri', sans-serif; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Admission Details — Brothers' Tutorial</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config={theme:{extend:{colors:{primary:'#1e3a5f','primary-light':'#2a5080',accent:'#f59e0b'}}}}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+Bengali:wght@400;500;600;700&display=swap');
+body{font-family:'Inter','Noto Sans Bengali',sans-serif}
+.bn{font-family:'Noto Sans Bengali','Inter',sans-serif}
+</style>
 </head>
-<body class="min-h-screen flex flex-col bg-brand-light text-slate-800 antialiased selection:bg-brand-blue/10">
+<body class="bg-slate-50 text-slate-800">
 
-  <!-- A. Header -->
-  <nav class="bg-white border-b border-slate-100 shadow-sm sticky top-0 z-50 backdrop-blur-md bg-white/90">
-    <div class="max-w-md mx-auto px-5 py-4 flex items-center justify-between">
-<a href="/" class="flex items-center gap-2.5 group">
-        <div id="admission-logo-container" class="w-9 h-9 bg-brand-navy rounded-xl flex items-center justify-center text-white shadow-sm transition-transform group-hover:scale-95 overflow-hidden">
-          <i id="admission-logo-icon" data-lucide="graduation-cap" class="w-5 h-5"></i>
-          <img id="admission-logo-img" class="w-full h-full object-cover hidden" alt="Logo">
-        </div>
-        <span class="font-bold text-lg text-brand-navy tracking-tight">Brothers Tutorial</span>
-      </a>
-      <a href="/" class="text-xs font-semibold text-brand-slate hover:text-brand-navy transition-colors flex items-center gap-1.5 py-1.5 px-3 rounded-lg hover:bg-slate-50">
-        <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i> Back to Home
-      </a>
+<!-- Navigation -->
+<nav class="bg-primary text-white sticky top-0 z-40 shadow-lg">
+  <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+    <a href="/" class="flex items-center gap-2.5">
+      <div class="w-9 h-9 rounded-lg bg-accent flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#1e3a5f" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342"/></svg>
+      </div>
+      <div class="leading-tight">
+        <div class="font-bold text-sm">Brothers' Tutorial</div>
+        <div class="text-[10px] text-white/50 bn">ব্রাদার্স টিউটোরিয়াল</div>
+      </div>
+    </a>
+    <div class="hidden md:flex items-center gap-6 text-sm font-medium">
+      <a href="/" class="hover:text-accent transition">Home</a>
+      <a href="/about.html" class="hover:text-accent transition">About</a>
+      <a href="/admission-details.html" class="text-accent">Admission</a>
     </div>
-  </nav>
+    <button id="mobMenuBtn" class="md:hidden p-1">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>
+    </button>
+  </div>
+  <div id="mobMenu" class="hidden md:hidden border-t border-white/10 px-4 pb-3 pt-2 space-y-1 text-sm font-medium">
+    <a href="/" class="block py-2 hover:text-accent transition">Home</a>
+    <a href="/about.html" class="block py-2 hover:text-accent transition">About</a>
+    <a href="/admission-details.html" class="block py-2 text-accent">Admission</a>
+  </div>
+</nav>
 
-  <!-- Main View Container Layout (Optimized for Mobile Screens) -->
-  <main class="flex-grow max-w-md w-full mx-auto px-4 pt-6 pb-32 space-y-6">
+<!-- Page Header -->
+<section class="bg-primary text-white py-16">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <h1 class="text-3xl md:text-4xl font-extrabold" id="pageTitle">Admission Details</h1>
+    <p class="bn text-xl text-accent font-semibold mt-2" id="pageTitleBn">ভর্তি বিবরণ</p>
+  </div>
+</section>
 
-    <!-- B. Elegant Hero Card -->
-    <div class="bg-white border border-slate-200/60 p-6 rounded-2xl shadow-sm relative overflow-hidden">
-      <div class="absolute -right-12 -top-12 w-32 h-32 bg-brand-blue/5 rounded-full blur-xl"></div>
-      
-      <div class="space-y-4">
-        <span class="inline-flex items-center px-3 py-1 bg-emerald-50 text-brand-emerald font-semibold rounded-full text-xs tracking-wide">
-          নার্সারি থেকে দ্বাদশ শ্রেণী
-        </span>
-        
-        <h1 class="font-bold text-2xl md:text-3xl text-brand-navy leading-tight">
-          ২০২৬-২৭ শিক্ষাবর্ষে ভর্তি চলছে
-        </h1>
-        
-        <!-- Value Proposition Banner -->
-        <div class="bg-brand-navy text-white px-4 py-3 rounded-xl flex items-center justify-between shadow-sm">
-          <span class="text-xs text-slate-300 font-medium">ভর্তি সংক্রান্ত ফি</span>
-          <span class="font-bold text-sm tracking-wide bg-white/10 px-3 py-1 rounded-lg border border-white/15">
-            ভর্তি ফি: ২০০ টাকা মাত্র
-          </span>
-        </div>
-      </div>
+<!-- Intro -->
+<section class="py-10">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <p class="text-lg text-slate-600 leading-relaxed" id="introEn"></p>
+    <p class="bn text-base text-slate-500 mt-2 leading-relaxed" id="introBn"></p>
+  </div>
+</section>
+
+<!-- Class Cards -->
+<section class="py-8">
+  <div class="max-w-5xl mx-auto px-4">
+    <h2 class="text-2xl font-bold text-primary text-center mb-8">Class-wise Fee Structure</h2>
+    <div class="grid sm:grid-cols-2 gap-6" id="classCards">
+      <div class="animate-pulse bg-white rounded-xl h-36"></div>
+      <div class="animate-pulse bg-white rounded-xl h-36"></div>
+      <div class="animate-pulse bg-white rounded-xl h-36"></div>
+      <div class="animate-pulse bg-white rounded-xl h-36"></div>
     </div>
+  </div>
+</section>
 
-    <!-- C. Illustration & Requirements Frame -->
-    <div class="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm space-y-5">
-      <!-- Minimalist Vector Illustration Row -->
-      <div class="bg-slate-50 rounded-xl p-4 flex items-center justify-center border border-slate-100">
-        <img src="https://www.svgrepo.com/show/493589/male-student-studying.svg" alt="Studying Graphic" class="h-28 object-contain drop-shadow-sm">
+<!-- Documents Required -->
+<section class="py-12 bg-white">
+  <div class="max-w-4xl mx-auto px-4">
+    <div class="bg-gradient-to-br from-primary to-primary-light rounded-2xl p-8 text-white text-center">
+      <div class="w-14 h-14 rounded-full bg-white/20 flex items-center justify-center mx-auto mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z"/></svg>
       </div>
-
-      <div class="space-y-3">
-        <h2 class="text-sm font-bold text-brand-navy uppercase tracking-wider flex items-center gap-2">
-          <i data-lucide="info" class="w-4 h-4 text-brand-blue"></i> সঙ্গে দিতে হবে (Prerequisites)
-        </h2>
-        
-        <ul class="space-y-2.5 text-sm text-slate-600 pl-1">
-          <li class="flex items-start gap-3">
-            <div class="w-5 h-5 bg-emerald-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-brand-emerald">
-              <i data-lucide="check" class="w-3.5 h-3.5"></i>
-            </div>
-            <span>৩ কপি রিসেন্ট কালার পাসপোর্ট সাইজ ফটো</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <div class="w-5 h-5 bg-emerald-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-brand-emerald">
-              <i data-lucide="check" class="w-3.5 h-3.5"></i>
-            </div>
-            <span>আধার কার্ডের জেরক্স কপি</span>
-          </li>
-          <li class="flex items-start gap-3">
-            <div class="w-5 h-5 bg-emerald-50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 text-brand-emerald">
-              <i data-lucide="check" class="w-3.5 h-3.5"></i>
-            </div>
-            <span>জন্ম সার্টিফিকেটের জেরক্স কপি (Birth Certificate)</span>
-          </li>
-        </ul>
-      </div>
+      <h3 class="text-xl font-bold mb-3">Documents Required</h3>
+      <p class="bn text-accent font-medium mb-3">প্রয়োজনীয় কাগজপত্র</p>
+      <p class="text-white/80 leading-relaxed" id="docsEn"></p>
+      <p class="bn text-white/60 text-sm mt-2 leading-relaxed" id="docsBn"></p>
     </div>
+  </div>
+</section>
 
-    <!-- D. Roadmap / Vertical Timeline Section -->
-    <div class="bg-white border border-slate-200/60 rounded-2xl p-6 shadow-sm space-y-6">
-      <div>
-        <h2 class="font-bold text-lg text-brand-navy">ভর্তির বিস্তারিত তথ্যাবলী</h2>
-        <p class="text-xs text-brand-slate mt-0.5">Official dates and timeline guidelines for session operations.</p>
-      </div>
-
-      <!-- Timeline Tracking Chain -->
-      <div class="relative pl-6 space-y-6 border-l border-slate-200/80 ml-3">
-        
-        <!-- Step 1 -->
-        <div class="relative">
-          <!-- Timeline Dot Indicators -->
-          <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-blue border-4 border-white shadow-sm ring-1 ring-slate-200"></div>
-          <div class="space-y-2">
-            <span class="inline-block px-2.5 py-0.5 bg-slate-100 text-brand-navy font-semibold text-xs rounded-md">
-              ভর্তি শুরুর তারিখ (Admission Open)
-            </span>
-            <p class="text-sm font-bold text-slate-800">১৫ই ডিসেম্বর, ২০২৫ থেকে অনবরত</p>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="relative">
-          <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-brand-emerald border-4 border-white shadow-sm ring-1 ring-slate-200"></div>
-          <div class="space-y-2">
-            <span class="inline-block px-2.5 py-0.5 bg-slate-100 text-brand-navy font-semibold text-xs rounded-md">
-              ক্লাস শুরুর তারিখ (Session Starts)
-            </span>
-            <p class="text-sm font-bold text-slate-800">৫ই জানুয়ারি, ২০২৬ থেকে</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </main>
-
-  <!-- E. Primary CTA Actions (Bottom Fixed Panel for Single-Handed Reach) -->
-  <div class="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200/80 p-4 shadow-xl z-50 backdrop-blur-lg bg-white/95 max-w-md mx-auto rounded-t-2xl">
-    <div class="space-y-3">
-      <!-- Primary Conversion Button (Call) -->
-      <a href="tel:+917384750167" class="flex items-center justify-center gap-2 w-full py-3.5 bg-brand-navy text-white font-bold text-base rounded-xl hover:bg-brand-blue active:scale-[0.98] transition-all shadow-md">
-        <i data-lucide="phone" class="w-4 h-4"></i> কল করুন (Call Now)
-      </a>
-      
-      <!-- Secondary Action Grid Pair -->
-      <div class="grid grid-cols-2 gap-3">
-        <a href="https://wa.me/917384750167" target="_blank" class="flex items-center justify-center gap-2 py-2.5 border border-slate-200 bg-white text-slate-700 font-semibold text-sm rounded-xl hover:bg-slate-50 active:scale-[0.98] transition-all">
-          <i data-lucide="message-square" class="w-4 h-4 text-emerald-600"></i> হোয়াটসঅ্যাপ
-        </a>
-        <a href="mailto:brotherstutorialofficial@gmail.com" class="flex items-center justify-center gap-2 py-2.5 border border-slate-200 bg-white text-slate-700 font-semibold text-sm rounded-xl hover:bg-slate-50 active:scale-[0.98] transition-all">
-          <i data-lucide="mail" class="w-4 h-4 text-rose-500"></i> ইমেইল করুন
+<!-- Contact CTA -->
+<section class="py-14">
+  <div class="max-w-4xl mx-auto px-4 text-center">
+    <div class="bg-accent/10 border-2 border-accent/30 rounded-2xl p-8">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#f59e0b" class="w-12 h-12 mx-auto mb-4"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z"/></svg>
+      <p class="text-lg text-slate-700 font-medium" id="contactEn"></p>
+      <p class="bn text-base text-slate-500 mt-1" id="contactBn"></p>
+      <div class="mt-6">
+        <a href="/" class="inline-flex items-center gap-2 bg-primary hover:bg-primary-light text-white font-semibold px-6 py-3 rounded-xl transition shadow-lg">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"/></svg>
+          Visit Homepage
         </a>
       </div>
     </div>
   </div>
+</section>
 
-  <script>
-    // Instantiate Vector Interface Icons
-    lucide.createIcons();
-    
-  </script>
-  <script>
-    async function loadAdmissionWorkspaceLogo() {
-      try {
-        const response = await fetch('/api/content');
-        const data = await response.json();
-        
-        if (data.sections.logoUrl) {
-          document.getElementById('admission-logo-icon').classList.add('hidden');
-          const logoImg = document.getElementById('admission-logo-img');
-          logoImg.src = data.sections.logoUrl;
-          logoImg.classList.remove('hidden');
-        }
-      } catch (err) {
-        console.error("Failed to load branding logo asset configurations.", err);
-      }
-      lucide.createIcons();
-    }
-    document.addEventListener('DOMContentLoaded', loadAdmissionWorkspaceLogo);
-  </script>
+<!-- Footer -->
+<footer class="bg-primary text-white py-8">
+  <div class="max-w-6xl mx-auto px-4 text-center text-sm text-white/50">
+    &copy; 2024 Brothers' Tutorial, Baruipara, Nadia. All rights reserved.
+  </div>
+</footer>
+
+<script>
+document.getElementById('mobMenuBtn').addEventListener('click', () => document.getElementById('mobMenu').classList.toggle('hidden'))
+
+async function init() {
+  try {
+    const r = await fetch('/api/content')
+    const d = await r.json()
+    const a = d.admission
+
+    document.getElementById('pageTitle').textContent = a.titleEn
+    document.getElementById('pageTitleBn').textContent = a.titleBn
+    document.getElementById('introEn').textContent = a.introEn
+    document.getElementById('introBn').textContent = a.introBn
+    document.getElementById('docsEn').textContent = a.documentsEn
+    document.getElementById('docsBn').textContent = a.documentsBn
+    document.getElementById('contactEn').textContent = a.contactEn
+    document.getElementById('contactBn').textContent = a.contactBn
+
+    const colors = [
+      'from-blue-500 to-blue-600',
+      'from-emerald-500 to-emerald-600',
+      'from-purple-500 to-purple-600',
+      'from-amber-500 to-amber-600'
+    ]
+    const icons = [
+      '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342"/></svg>',
+      '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>',
+      '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/></svg>',
+      '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/></svg>'
+    ]
+
+    document.getElementById('classCards').innerHTML = a.classes.map((c, i) => {
+      return '<div class="bg-white rounded-xl shadow-sm overflow-hidden hover:shadow-md transition"><div class="bg-gradient-to-r ' + colors[i % colors.length] + ' p-5 flex items-center gap-3"><div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white flex-shrink-0">' + icons[i % icons.length] + '</div><div><h3 class="font-bold text-white text-sm md:text-base">' + c.nameEn + '</h3><p class="bn text-white/70 text-xs md:text-sm">' + c.nameBn + '</p></div></div><div class="p-5 flex items-center justify-between"><div><p class="text-xs text-slate-400 uppercase tracking-wide font-medium">Monthly Fee</p><p class="text-2xl font-extrabold text-primary mt-0.5">' + c.feeEn + '</p><p class="bn text-sm text-slate-500">' + c.feeBn + '</p></div><div class="w-10 h-10 rounded-full bg-accent/10 text-accent flex items-center justify-center"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"/></svg></div></div></div>'
+    }).join('')
+
+  } catch (e) {
+    document.getElementById('classCards').innerHTML = '<p class="text-red-500 col-span-2 text-center py-8">Failed to load admission details.</p>'
+  }
+}
+init()
+</script>
 </body>
 </html>
