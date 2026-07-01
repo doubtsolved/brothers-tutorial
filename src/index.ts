@@ -25,14 +25,7 @@ const noopKV = {
 }
 
 let kvFallback: any = noopKV
-if (isNode) {
-  try {
-    const m = await import('./kvMo' + 'ck.ts')
-    kvFallback = new m.KVMock()
-  } catch (e) {
-    console.warn('KV Mock unavailable, using noop fallback:', e)
-  }
-}
+
 
 /* ── Global middleware: safely preserve & merge Cloudflare env properties ── */
 app.use('*', async (c, next) => {
