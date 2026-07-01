@@ -176,45 +176,62 @@ app.route('/admin', routes_ts_1.adminRoutes);
     }
   )
 } */
+/* ── Local Node.js server — wrapped in async IIFE to prevent top-level await ── */
+/* String-split import prevents Cloudflare bundler from pulling in node-server */
 if (isNode) {
-    var _b = await Promise.resolve().then(function () { return require('node:fs'); }), readFileSync_1 = _b.readFileSync, existsSync_1 = _b.existsSync, statSync_1 = _b.statSync;
-    var _c = await Promise.resolve().then(function () { return require('node:path'); }), join_1 = _c.join, extname_1 = _c.extname;
-    var serve = (await Promise.resolve().then(function () { return require('@hono/node-server'); })).serve;
-    var MIME_1 = {
-        '.html': 'text/html; charset=utf-8',
-        '.css': 'text/css; charset=utf-8',
-        '.js': 'application/javascript; charset=utf-8',
-        '.json': 'application/json; charset=utf-8',
-        '.png': 'image/png',
-        '.jpg': 'image/jpeg',
-        '.svg': 'image/svg+xml',
-        '.ico': 'image/x-icon',
-        '.webp': 'image/webp',
-    };
-    app.use('*', function (c, next) { return __awaiter(void 0, void 0, void 0, function () {
-        var fp;
-        return __generator(this, function (_a) {
-            if (c.req.path.startsWith('/api/') || c.req.path.startsWith('/admin'))
-                return [2 /*return*/, next()];
-            fp = join_1(process.cwd(), 'public', c.req.path === '/' ? 'index.html' : c.req.path);
-            try {
-                if (statSync_1(fp).isDirectory())
-                    fp = join_1(fp, 'index.html');
-                if (!existsSync_1(fp))
-                    return [2 /*return*/, c.notFound()];
-                return [2 /*return*/, new Response(readFileSync_1(fp), {
-                        headers: { 'Content-Type': MIME_1[extname_1(fp)] || 'application/octet-stream' }
-                    })];
+    (function () { return __awaiter(void 0, void 0, void 0, function () {
+        var _a, readFileSync, existsSync, statSync, _b, join, extname, serve, MIME;
+        return __generator(this, function (_c) {
+            var _d;
+            switch (_c.label) {
+                case 0: return [4 /*yield*/, Promise.resolve().then(function () { return require('node:fs'); })];
+                case 1:
+                    _a = _c.sent(), readFileSync = _a.readFileSync, existsSync = _a.existsSync, statSync = _a.statSync;
+                    return [4 /*yield*/, Promise.resolve().then(function () { return require('node:path'); })];
+                case 2:
+                    _b = _c.sent(), join = _b.join, extname = _b.extname;
+                    return [4 /*yield*/, (_d = '@hono/node-ser' + 'ver', Promise.resolve().then(function () { return require(_d); }))];
+                case 3:
+                    serve = (_c.sent()).serve;
+                    MIME = {
+                        '.html': 'text/html; charset=utf-8',
+                        '.css': 'text/css; charset=utf-8',
+                        '.js': 'application/javascript; charset=utf-8',
+                        '.json': 'application/json; charset=utf-8',
+                        '.png': 'image/png',
+                        '.jpg': 'image/jpeg',
+                        '.svg': 'image/svg+xml',
+                        '.ico': 'image/x-icon',
+                        '.webp': 'image/webp',
+                    };
+                    app.use('*', function (c, next) { return __awaiter(void 0, void 0, void 0, function () {
+                        var fp;
+                        return __generator(this, function (_a) {
+                            if (c.req.path.startsWith('/api/') || c.req.path.startsWith('/admin'))
+                                return [2 /*return*/, next()];
+                            fp = join(process.cwd(), 'public', c.req.path === '/' ? 'index.html' : c.req.path);
+                            try {
+                                if (statSync(fp).isDirectory())
+                                    fp = join(fp, 'index.html');
+                                if (!existsSync(fp))
+                                    return [2 /*return*/, c.notFound()];
+                                return [2 /*return*/, new Response(readFileSync(fp), {
+                                        headers: { 'Content-Type': MIME[extname(fp)] || 'application/octet-stream' }
+                                    })];
+                            }
+                            catch (_b) {
+                                return [2 /*return*/, c.notFound()];
+                            }
+                            return [2 /*return*/];
+                        });
+                    }); });
+                    serve({ fetch: app.fetch, port: 3000 }, function (i) {
+                        console.log("\n\uD83D\uDE80 Brothers' Tutorial \u2014 http://localhost:".concat(i.port));
+                        console.log("   \u279C  Admin: http://localhost:".concat(i.port, "/admin?token=brothers_academic_secret_2026\n"));
+                    });
+                    return [2 /*return*/];
             }
-            catch (_b) {
-                return [2 /*return*/, c.notFound()];
-            }
-            return [2 /*return*/];
         });
-    }); });
-    serve({ fetch: app.fetch, port: 3000 }, function (i) {
-        console.log("\n\uD83D\uDE80 Brothers' Tutorial \u2014 http://localhost:".concat(i.port));
-        console.log("   \u279C  Admin: http://localhost:".concat(i.port, "/admin?token=brothers_academic_secret_2026\n"));
-    });
+    }); })();
 }
 exports.default = app;
