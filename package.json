@@ -3,14 +3,12 @@
   "version": "1.0.0",
   "type": "module",
   "private": true,
-  "dependencies": {
-    "@hono/node-server": "^2.0.6",
-    "hono": "^4.7.4"
-  }
-}
-{
   "scripts": {
     "dev": "node --experimental-strip-types src/local.ts",
     "start": "node --experimental-strip-types src/local.ts"
+  },
+  "dependencies": {
+    "@hono/node-server": "^2.0.6",
+    "hono": "^4.7.4"
   }
 }
