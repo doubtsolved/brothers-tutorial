@@ -2,13 +2,14 @@
   "name": "brothers-tutorial",
   "version": "1.0.0",
   "type": "module",
-  "private": true,
+  "description": "",
+  "main": "src/index.ts",
   "scripts": {
-    "dev": "node --experimental-strip-types src/local.ts",
-    "start": "node --experimental-strip-types src/local.ts"
+    "dev": "node --watch --experimental-strip-types src/index.ts"
   },
   "dependencies": {
-    "@hono/node-server": "^2.0.6",
-    "hono": "^4.7.4"
+    "@hono/node-server": "^1.13.7",
+    "cloudinary": "^2.5.1",
+    "hono": "^4.6.14"
   }
 }
